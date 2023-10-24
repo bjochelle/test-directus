@@ -1,0 +1,40 @@
+version: '3'
+services:
+    directus:
+        container_name: test-directus
+        image: directus/directus:10.4.0
+        ports:
+            - 8081:8055
+        volumes:
+            # By default, uploads are stored in /directus/uploads
+            # Always make sure your volumes matches the storage root when using
+            # local driver
+            # - ./uploads:/directus/uploads
+            # If you want to load extensions from the host
+            - ./extensions:/directus/extensions
+        environment:
+            KEY: '3463d5fd-69dc-41c9-b4f1-3877a9343b71'
+            SECRET: '3e48fa93-71ae-4cd4-8690-d82c68f3384c'
+
+            DB_CLIENT: 'mysql'
+            DB_DATABASE: 'test-directus'
+            DB_USER: 'root'
+            DB_PASSWORD: ''
+            DB_HOST: 'host.docker.internal'
+            DB_PORT: 3306
+
+            CORS_ENABLED: 'true'
+            CORS_ORIGIN: 'true'
+
+            ADMIN_EMAIL: 'admin@example.com'
+            ADMIN_PASSWORD: 'd1r3ctu5'
+
+            ACCESS_TOKEN_TTL: '1d'
+
+            EXTENSIONS_AUTO_RELOAD: 'true'
+
+           
+
+            # Make sure to set this in production
+            # (see https://docs.directus.io/self-hosted/config-options#general)
+            # PUBLIC_URL: 'https://directus.example.com'
